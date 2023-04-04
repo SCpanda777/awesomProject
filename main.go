@@ -40,9 +40,9 @@ func getPostsByUserID(c *gin.Context) {
 }
 
 func main() {
-	dconn := "user:password@tcp(127.0.0.1:3306)/forum?charset=utf8mb4&parseTime=True&loc=Local" //password需要改为自己mysql的密码
+	conn := "user:password@tcp(127.0.0.1:3306)/forum?charset=utf8mb4&parseTime=True&loc=Local" //password需要改为自己mysql的密码
 
-	db, err := gorm.Open("mysql", dconn)
+	db, err := gorm.Open("mysql", conn)
 	if err != nil {
 		panic("failed to connect database")
 	}
@@ -56,5 +56,8 @@ func main() {
 	// 根据用户ID查询帖子路由
 	r.GET("/posts/:user_id", getPostsByUserID)
 
-	r.Run()
+	err = r.Run()
+	if err != nil {
+		panic("run failed!")
+	}
 }
