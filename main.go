@@ -16,6 +16,7 @@ type Post struct {
 type User struct {
 	gorm.Model
 	Name string `json:"name"`
+	UserID  uint   `json:"user_id"`
 }
 
 var db *gorm.DB
